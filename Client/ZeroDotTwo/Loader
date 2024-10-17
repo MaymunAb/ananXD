@@ -165,6 +165,8 @@ function loadUI()
 	print("╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═════╝ ")
 	print("-")
 	print("Version: 0.2 Pre Beta")
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/MaymunAb/ananXD/refs/heads/main/Client/ZeroDotTwo/GameHub'))()
+        Loader:Destroy()
 end
 
 loadUI()
