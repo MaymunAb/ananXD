@@ -46,6 +46,8 @@ Chaos.Name = "Chaos"
 Chaos.Parent = game.Players.LocalPlayer.PlayerGui
 Chaos.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Chaos.Enabled = true
+Chaos.ResetOnSpawn = false
+Chaos.IgnoreGuiInset = true
 
 Frame.Parent = Chaos
 Frame.AnchorPoint = Vector2.new(0, 0.5)
@@ -80,7 +82,7 @@ Buttons.Size = UDim2.new(0.800000012, 0, 0.600000024, 0)
 
 UICorner.Parent = Buttons
 
-Aimbot.Name = "Kill Aura"
+Aimbot.Name = "Aimbot"
 Aimbot.Parent = Buttons
 Aimbot.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 Aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -103,10 +105,11 @@ Title.BorderSizePixel = 0
 Title.Position = UDim2.new(-0.155617788, 0, 0.999999702, 0)
 Title.Size = UDim2.new(1.29999995, 0, 0.5, 0)
 Title.Font = Enum.Font.Arimo
-Title.Text = "Aimbot"
+Title.Text = "Kill Aura"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 16.000
 Title.TextWrapped = true
+Title.TextScaled = true
 
 ESP.Name = "ESP"
 ESP.Parent = Buttons
@@ -135,6 +138,7 @@ Title_2.Text = "ESP"
 Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title_2.TextSize = 16.000
 Title_2.TextWrapped = true
+Title_2.TextScaled = true
 
 InfiniteYield.Name = "InfiniteYield"
 InfiniteYield.Parent = Buttons
@@ -163,6 +167,7 @@ Title_3.Text = "Infinite"
 Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title_3.TextSize = 16.000
 Title_3.TextWrapped = true
+Title_3.TextScaled = true
 
 Title2.Name = "Title2"
 Title2.Parent = InfiniteYield
@@ -177,6 +182,7 @@ Title2.Text = "Yield"
 Title2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title2.TextSize = 16.000
 Title2.TextWrapped = true
+Title2.TextScaled = true
 
 UICorner_5.Parent = Frame
 
@@ -194,6 +200,7 @@ CloseUI.TextColor3 = Color3.fromRGB(255, 255, 255)
 CloseUI.TextScaled = true
 CloseUI.TextSize = 14.000
 CloseUI.TextWrapped = true
+CloseUI.TextScaled = true
 
 local configK3S = TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0)
 
@@ -464,7 +471,7 @@ ESP.MouseButton1Click:Connect(function()
 		ToggleESP = false
 		
 		for i, v in ipairs(workspace:GetDescendants()) do
-			if v.Name == "Totally NOT Esp" then
+			if v.Name == "Totally NOT Esp" or v.Name == "ESP Text" then
 				v:Destroy()
 			end
 		end
