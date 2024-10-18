@@ -43,7 +43,7 @@ shared.settings = {
 }
 
 Chaos.Name = "Chaos"
-Chaos.Parent = game.Players.LocalPlayer.PlayerGui
+Chaos.Parent = game.CoreGui
 Chaos.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Chaos.Enabled = true
 Chaos.ResetOnSpawn = false
