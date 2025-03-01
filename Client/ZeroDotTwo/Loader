@@ -140,16 +140,16 @@ function loadUI()
 	sound.SoundId = "rbxassetid://3450794184"
 	
 	wait(0.2)
-	Status.Text = "Fetching UI Client"
+	Status.Text = "Completing UI [1/4]"
 	TweenService:Create(Bar, configKK, {Size = UDim2.new(0.2,0,1,0)}):Play()
 	wait(0.1)
-	Status.Text = "Fetching Scripts"
+	Status.Text = "Completing UI [2/4]"
 	TweenService:Create(Bar, configKK, {Size = UDim2.new(0.5,0,1,0)}):Play()
 	wait(0.2)
-	Status.Text = "Fetching Local Scripts"
+	Status.Text = "Completing UI [3/4]"
 	TweenService:Create(Bar, configKK, {Size = UDim2.new(0.9,0,1,0)}):Play()
-	wait(0.25)
-	Status.Text = "Loading Script"
+	wait(0.7)
+	Status.Text = "Completing UI [4/4]"
 	TweenService:Create(Bar, configKK, {Size = UDim2.new(1,0,1,0)}):Play()
 	wait(0.3)
 	Status.Text = "Finished"
