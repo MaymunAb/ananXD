@@ -1,6 +1,8 @@
 if game.PlaceId == 6441847031 then
     loadstring(game:HttpGet('https://raw.githubusercontent.com/MaymunAb/ananXD/refs/heads/main/Client/ZeroDotTwo/Chaos'))()
-    else
+elseif game.PlaceId == 11727501024 then
+
+else
     warn("Not Supported Game Detected")
     warn(game.PlaceId)
 end
