@@ -1,1 +1,179 @@
+--Hey! our code isn't obfuscated and we allow copying!, if you like this please star our repository
+local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local spawners = {}
 
+local createacartride = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local GameTitle = Instance.new("TextLabel")
+local Buttons = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Button = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local status = Instance.new("TextLabel")
+local title = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
+local CloseUI = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+
+createacartride.Name = "createacartride"
+createacartride.Parent = game.Players.LocalPlayer.PlayerGui
+createacartride.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+createacartride.ResetOnSpawn = false
+createacartride.Enabled = true
+
+local IsDragging = false 	
+local dragInput
+local StartingPoint
+local oldPos
+
+Frame.Parent = createacartride
+Frame.AnchorPoint = Vector2.new(0, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.349999994, 0, 0.5, 0)
+Frame.Size = UDim2.new(0.300000012, 0, 0.349999994, 0)
+
+GameTitle.Name = "GameTitle"
+GameTitle.Parent = Frame
+GameTitle.AnchorPoint = Vector2.new(0.5, 0.449999988)
+GameTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+GameTitle.BackgroundTransparency = 1.000
+GameTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GameTitle.BorderSizePixel = 0
+GameTitle.Position = UDim2.new(0.5, 0, 0.0799999833, 0)
+GameTitle.Size = UDim2.new(1, 0, 0.100000001, 0)
+GameTitle.Font = Enum.Font.Arimo
+GameTitle.Text = "Create A Cart Ride"
+GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+GameTitle.TextSize = 18.000
+GameTitle.TextWrapped = true
+
+Buttons.Name = "Buttons"
+Buttons.Parent = Frame
+Buttons.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Buttons.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Buttons.BorderSizePixel = 0
+Buttons.Position = UDim2.new(0.100000001, 0, 0.200000003, 0)
+Buttons.Size = UDim2.new(0.800000012, 0, 0.600000024, 0)
+
+UICorner.Parent = Buttons
+
+Button.Name = "Button"
+Button.Parent = Buttons
+Button.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Button.BorderSizePixel = 0
+Button.Position = UDim2.new(0.424494267, 0, 0.287935853, 0)
+Button.Size = UDim2.new(0.150000006, 0, 0.300000012, 0)
+Button.Font = Enum.Font.Arimo
+Button.Text = ""
+Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+Button.TextSize = 14.000
+
+UICorner_2.Parent = Button
+
+status.Name = "status"
+status.Parent = Buttons
+status.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+status.BackgroundTransparency = 1.000
+status.BorderColor3 = Color3.fromRGB(0, 0, 0)
+status.BorderSizePixel = 0
+status.Position = UDim2.new(-2.82995987, 0, 2.34517026, 0)
+status.Size = UDim2.new(6.66666651, 0, 0.5, 0)
+status.Font = Enum.Font.ArimoBold
+status.Text = "Calculating total levels.."
+status.TextColor3 = Color3.fromRGB(255, 255, 255)
+status.TextScaled = true
+status.TextSize = 16.000
+status.TextWrapped = true
+
+title.Name = "title"
+title.Parent = Buttons
+title.AnchorPoint = Vector2.new(0.5, 0.449999988)
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+title.BorderSizePixel = 0
+title.Position = UDim2.new(0.50000006, 0, 0.116537072, 0)
+title.Size = UDim2.new(1.00000012, 0, 0.18119356, 0)
+title.Font = Enum.Font.Arimo
+title.Text = "Teleport to Level Spawners"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 18.000
+title.TextWrapped = true
+
+UICorner_3.Parent = Frame
+
+CloseUI.Name = "CloseUI"
+CloseUI.Parent = Frame
+CloseUI.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+CloseUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CloseUI.BorderSizePixel = 0
+CloseUI.Position = UDim2.new(0.928011298, 0, 0, 0)
+CloseUI.Size = UDim2.new(0.0700000003, 0, 0.100000001, 0)
+CloseUI.ZIndex = 2
+CloseUI.Font = Enum.Font.Arimo
+CloseUI.Text = "X"
+CloseUI.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseUI.TextScaled = true
+CloseUI.TextSize = 14.000
+CloseUI.TextWrapped = true
+
+UICorner_4.Parent = CloseUI
+
+local function update(input)
+	local delta = input.Position - StartingPoint
+	Frame.Position = UDim2.new(oldPos.X.Scale, oldPos.X.Offset + delta.X, oldPos.Y.Scale, oldPos.Y.Offset + delta.Y)
+end
+
+Frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		IsDragging = true
+		StartingPoint = input.Position
+		oldPos = Frame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				IsDragging = false
+			end
+		end)
+	end
+end)
+
+Frame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement then
+		dragInput = input
+	end
+end)
+
+Frame.InputChanged:Connect(function(input)
+	if input == dragInput and IsDragging then
+		update(input)
+	end
+end)
+
+for _, v in ipairs(workspace:GetDescendants()) do
+	if v:IsA("Model") and v.Name == "LevelSpawn" then
+		table.insert(spawners, v)
+	end
+end
+
+status.Visible = false
+
+CloseUI.MouseButton1Click:Connect(function()
+	createacartride:Destroy()
+end)
+
+Button.MouseButton1Click:Connect(function()
+	game:GetService("TweenService"):Create(Button, TweenInfo.new(0.5), {BackgroundColor3 = Color3.new(0, 170, 0)}):Play()
+	
+	for _, model in ipairs(spawners) do
+		if model:IsA("Model") and model.PrimaryPart then
+			character:SetPrimaryPartCFrame(model.LevelSpawn.CFrame)
+			wait(1)
+		end
+	end
+	wait()	
+	game:GetService("TweenService"):Create(Button, TweenInfo.new(0.5), {BackgroundColor3 = Color3.new(170, 0, 0)}):Play()
+end)
