@@ -1,3 +1,4 @@
+--Hey! our code isn't obfuscated and we allow copying!, if you like this please star our repository
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
